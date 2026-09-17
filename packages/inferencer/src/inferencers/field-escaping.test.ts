@@ -34,8 +34,13 @@ describe("field name escaping", () => {
   });
 
   describe.each(Object.entries(renderers))("%s", (_path, load) => {
-    it.each(fieldNames)("preserves field names as data %j", async (key) => {
-      const { renderer } = await load();
+    let renderer: (context: RendererContext) => string;
+
+    beforeAll(async () => {
+      ({ renderer } = await load());
+    }, 180000);
+
+    it.each(fieldNames)("preserves field names as data %j", (key) => {
       for (const i18n of [false, true]) {
         for (const type of fieldTypes) {
           const code = renderer({
