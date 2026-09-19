@@ -1,3 +1,4 @@
+/// <reference types="vite/client" />
 import ts from "typescript";
 import type { InferField, RendererContext } from "../types";
 
